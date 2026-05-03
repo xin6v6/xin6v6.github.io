@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://xin6v6.github.io/sitemap.xml
