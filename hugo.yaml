@@ -36,10 +36,21 @@ params:
   showtoc: true
   tocopen: false
 
-  homeInfoParams:
-    Title: "Hi, I'm Xin 👋"
-    Content: >
-      欢迎来到我的博客，这里记录我的技术探索和生活感悟。
+  profileMode:
+    enabled: true
+    title: "Hi, I'm Xin 👋"
+    subtitle: "AGI 工程师 · 记录 AI / TypeScript / Rust 的探索与实践"
+    imageUrl: "https://github.com/xin6v6.png"
+    imageWidth: 120
+    imageHeight: 120
+    imageTitle: "xin6v6"
+    buttons:
+      - name: AI
+        url: /ai/
+      - name: TypeScript
+        url: /typescript/
+      - name: Rust
+        url: /rust/
 
   socialIcons:
     - name: github
