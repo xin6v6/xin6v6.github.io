@@ -44,11 +44,6 @@ summary: "手把手带你完成模型选型、技术栈确认与架构设计等�
 
 {{< mermaid >}}
 graph TD
-    %% 定义节点样式
-    classDef brain fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,rx:10,ry:10;
-    classDef loop fill:#fff3e0,stroke:#ef6c00,stroke-width:2px;
-    classDef io fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px,stroke-dasharray: 5 5;
-
     %% 外部输入输出
     Start([用户提出任务]) --> History[将任务存入对话历史 TS Memory Array]
     
@@ -70,9 +65,4 @@ graph TD
     
     %% 外部输出
     FinalResponse --> End([结束任务并输出])
-
-    %% 应用样式
-    class LLM brain;
-    class AgentLoop,Decide,UpdateHistory loop;
-    class Start,End io;
 {{< /mermaid >}}
