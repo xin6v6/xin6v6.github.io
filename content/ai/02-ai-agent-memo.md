@@ -42,7 +42,7 @@ summary: "手把手带你完成模型选型、技术栈确认与架构设计等�
 ## 3. 实现架构图
 
 
-```mermaid
+{{< mermaid >}}
 graph TD
     %% 定义节点样式
     classDef brain fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,rx:10,ry:10;
@@ -50,22 +50,22 @@ graph TD
     classDef io fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px,stroke-dasharray: 5 5;
 
     %% 外部输入输出
-    Start([用户提出任务]) --> History[将任务存入对话历史`TS Memory Array`]
+    Start([用户提出任务]) --> History[将任务存入对话历史 TS Memory Array]
     
     %% 核心 Agent 循环
     subgraph AgentLoop [Agent 核心循环 - 运行在 Bun 环境]
-        History --> LLM[🧠 LLM '大脑' `Qwen/Gemini API`调用]
+        History --> LLM[🧠 LLM 大脑 Qwen/Gemini API 调用]
         
         LLM -- 生成 Thought: 思考如何做 --> Decide{是否需要工具?}
         
         %% 分支1：执行工具
-        Decide -- 是 (调用函数) --> ExecuteTool[🛠️ 执行工具 Action`调用本地 TS 工具函数`]
-        ExecuteTool --> Observe[👀 获取 Observation`工具执行结果`]
-        Observe --> UpdateHistory[更新对话历史`Thought + Action + Observation`]
+        Decide -- 是 调用函数 --> ExecuteTool[🛠️ 执行工具 Action 调用本地 TS 工具函数]
+        ExecuteTool --> Observe[👀 获取 Observation 工具执行结果]
+        Observe --> UpdateHistory[更新对话历史 Thought + Action + Observation]
         UpdateHistory --> LLM
         
         %% 分支2：回答用户
-        Decide -- 否 (得出结论) --> FinalResponse[✨ 生成最终回答]
+        Decide -- 否 得出结论 --> FinalResponse[✨ 生成最终回答]
     end
     
     %% 外部输出
@@ -75,3 +75,4 @@ graph TD
     class LLM brain;
     class AgentLoop,Decide,UpdateHistory loop;
     class Start,End io;
+{{< /mermaid >}}
