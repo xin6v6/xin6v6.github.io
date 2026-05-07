@@ -1,5 +1,5 @@
 ---
-title: "AI时代第一课：认识Agent"
+title: "AI时代第一章：认识Agent"
 date: 2026-05-03
 tags: ["AI", "Agent"]
 summary: "什么是 AI Agent？它和普通的聊天机器人有什么不同？这篇文章带你从零开始认识 Agent。"
