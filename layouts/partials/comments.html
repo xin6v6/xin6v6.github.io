@@ -1,15 +1,63 @@
-<script src="https://giscus.app/client.js"
-        data-repo="xin6v6/xin6v6.github.io"
-        data-repo-id="R_kgDOSS8S3Q"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOSS8S3c4C8fna"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
+<style>
+  .giscus-wrap {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .giscus-wrap h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.03em;
+  }
+  .giscus-frame {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+</style>
+
+<div class="giscus-wrap">
+  <h3>评论 & 反应</h3>
+  <script src="https://giscus.app/client.js"
+          data-repo="xin6v6/xin6v6.github.io"
+          data-repo-id="R_kgDOSS8S3Q"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOSS8S3c4C8fna"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="transparent_dark"
+          data-lang="zh-CN"
+          crossorigin="anonymous"
+          async>
+  </script>
+</div>
+
+<script>
+  // 跟随主题切换同步 Giscus
+  function sendGiscusTheme(theme) {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme } } },
+      'https://giscus.app'
+    );
+  }
+
+  function resolveTheme() {
+    const stored = localStorage.getItem('pref-theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return (stored === 'dark' || (!stored && systemDark)) ? 'transparent_dark' : 'light';
+  }
+
+  // 初始化后等 iframe 加载完再设置主题
+  window.addEventListener('load', () => sendGiscusTheme(resolveTheme()));
+
+  // 监听 PaperMod 主题切换
+  const observer = new MutationObserver(() => sendGiscusTheme(resolveTheme()));
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 </script>
