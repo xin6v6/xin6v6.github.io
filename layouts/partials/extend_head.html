@@ -1,6 +1,24 @@
 {{- if .Store.Get "hasMermaid" }}
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });
+
+    function getMermaidTheme() {
+      const bodyTheme = document.body.classList.contains('dark') ? 'dark' : null;
+      const htmlTheme = document.documentElement.getAttribute('data-theme');
+      const stored = localStorage.getItem('pref-theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = bodyTheme === 'dark' || htmlTheme === 'dark' || stored === 'dark' || (!stored && systemDark);
+      return isDark ? 'dark' : 'neutral';
+    }
+
+    mermaid.initialize({ startOnLoad: true, theme: getMermaidTheme() });
+
+    // 跟随 PaperMod 主题切换按钮
+    const observer = new MutationObserver(() => {
+      mermaid.initialize({ theme: getMermaidTheme() });
+      mermaid.run();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   </script>
 {{- end }}
